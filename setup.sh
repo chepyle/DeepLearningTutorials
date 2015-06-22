@@ -4,7 +4,13 @@
 
 # Install basics
 
-sudo apt-get install -y git python-pip python-dev ipython unzip zlibc zlib1g zlib1g-dev lynx libjpeg-dev
+sudo apt-get install -y git python-pip python-dev ipython unzip zlibc zlib1g zlib1g-dev lynx libjpeg-dev python-numpy python-scipy python-nose g++ libopenblas-dev git
+
+git clone git://github.com/Theano/Theano.git
+cd Theano
+python setup.py develop --user
+
+cd ~
 
 # Install emacs24
 # https://launchpad.net/~cassou/+archive/emacs
@@ -18,7 +24,7 @@ ln -sb dotfiles/.screenrc .
 ln -sf dotfiles/.emacs.d .
 
 # get project specific repo
-git clone https://github.com/chepyle/datascience-bowl
+git clone https://github.com/chepyle/DeepLearningTutorials
 # move nouveau blacklist config file for NVIDIA driver install
 sudo cp ~/DeepLearningTutorials/nouveau-kms.conf /etc/modprobe.d/nouveau-kms.conf
 
@@ -31,6 +37,8 @@ sudo apt-get install -y linux-image-extra-virtual
 echo options nouveau modeset=0 | sudo tee -a /etc/modprobe.d/nouveau-kms.conf
 
 sudo update-initramfs -u
+
+
 
 # reboot
 sudo reboot
