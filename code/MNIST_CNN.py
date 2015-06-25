@@ -394,7 +394,7 @@ def predict(test_dataset, filename = 'weights.pkl' ):
     return fit_predict(data=[], labels=[], filename= filename, test_datasets=[test_dataset], action = 'predict')[0] 
 
 
-def fit_predict(data, labels, action, filename, test_datasets = [], learning_rate=0.3, n_epochs=3, nkerns=[20, 50], batch_size=500, seed=8000):
+def fit_predict(data, labels, action, filename, test_datasets = [], learning_rate=0.3, n_epochs=30, nkerns=[20, 50], batch_size=500, seed=8675309):
     rng = numpy.random.RandomState(seed)
     x = T.matrix('x')  # the data is presented as rasterized images
     y = T.ivector('y')  # the labels are presented as 1D vector of [int] labels
