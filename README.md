@@ -1,7 +1,8 @@
 #Quick Start
 
--Launch an Amazon EC2 GPU instance (g2.2xlarge), spot insance price is usually <0.20 USD
--Once logged in, enter the command:
+--Launch an Amazon EC2 GPU instance (g2.2xlarge), spot insance price is usually <0.20 USD
+
+--Once logged in, enter the command:
 `curl https://raw.githubusercontent.com/chepyle/DeepLearningTutorials/master/setup.sh | sh`
 
 
