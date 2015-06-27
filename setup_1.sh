@@ -7,12 +7,6 @@ sudo apt-get update && apt-get install build-essential
 
 sudo apt-get install -y git python-pip python-dev ipython unzip zlibc zlib1g zlib1g-dev lynx libjpeg-dev python-numpy python-scipy python-nose g++ libopenblas-dev gcc gfortran wget linux-image-generic  
 
-# install bleeding-edge theano:
-git clone git://github.com/Theano/Theano.git
-cd Theano
-python setup.py develop --user
-
-cd ~
 
 # Install emacs24
 # https://launchpad.net/~cassou/+archive/emacs
@@ -31,23 +25,27 @@ ln -sb dotfiles/.bashrc_custom .
 # get project specific repo
 git clone https://github.com/chepyle/DeepLearningTutorials
 
-# get some sweet pylearn2: (http://deeplearning.net/software/pylearn2/#download-and-installation)
-git clone git://github.com/lisa-lab/pylearn2.git
-cd pylearn2
-sudo python setup.py develop
 
 # update NVIDIA driver
-# http://markus.com/install-theano-on-aws/
-sudo wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1404/x86_64/cuda-repo-ubuntu1404_7.0-28_amd64.deb  
+# http://markus.com/install-theano-on-aws/ ** interesting, but I had problems getting it to work, try instead:
+# https://github.com/BVLC/caffe/wiki/Install-Caffe-on-EC2-from-scratch-(Ubuntu,-CUDA-7,-cuDNN)
+wget http://developer.download.nvidia.com/compute/cuda/7_0/Prod/local_installers/cuda_7.0.28_linux.run
 
-sudo dpkg -i cuda-repo-ubuntu1404_7.0-28_amd64.deb 
+chmod +x cuda_7.0.28_linux.run
+mkdir nvidia_installers
+./cuda_7.0.28_linux.run -extract=`pwd`/nvidia_installers
 
-sudo apt-get update
+sudo apt-get install linux-image-extra-virtual
 
-sudo apt-get install -y cuda 
+'''
+Important: While installing the linux-image-extra-virtual, you may be prompted "What would you like to do about menu.lst?" I selected "keep the local version currently installed"
+'''
 
-echo -e "\nexport PATH=/usr/local/cuda/bin:$PATH\n\nexport LD_LIBRARY_PATH=/usr/local/cuda/lib64" >> .bashrc  
+sudo cp ~/DeepLearningTutorials/nouveau-kms.conf /etc/modprobe.d/nouveau-kms.conf
 
+echo options nouveau modeset=0 | sudo tee -a /etc/modprobe.d/nouveau-kms.conf
+sudo update-initramfs -u
+sudo reboot
 
 '''
 #An older version of  cuda installer:

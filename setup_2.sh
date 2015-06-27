@@ -3,13 +3,61 @@
 # for headless setup. Only needs to be run once after instance creation
 # PART 2 - after the reboot!
 
-# from http://markus.com/install-theano-on-aws/
+# from https://github.com/BVLC/caffe/wiki/Install-Caffe-on-EC2-from-scratch-(Ubuntu,-CUDA-7,-cuDNN)
 
-cuda-install-samples-7.0.sh ~/
+sudo apt-get install linux-source
+sudo apt-get install linux-headers-`uname -r`
 
-cd NVIDIA\_CUDA-7.0\_Samples/1\_Utilities/deviceQuery  
-make  
-./deviceQuery
+cd nvidia_installers
+sudo ./NVIDIA-Linux-x86_64-346.46.run
+
+'''
+Accept the license agreement.
+If you see: "nvidia-installer was forced to guess the X library path '/usr/lib' and X module path ..." go ahead anc click OK.
+If you see "The CC version check failed" then click "Ignore CC version check".
+It may ask you about 32-bit libraries, I selected to yes, install them.
+It will ask you about running nvidia-xconfig to update your X configuration file. I selected no.
+Run nvidia-smi to view the installed GPUs.
+'''
+
+sudo modprobe nvidia
+sudo apt-get install build-essential
+sudo ./cuda-linux64-rel-7.0.28-19326674.run
+sudo ./cuda-samples-linux-7.0.28-19326674.run
+
+'''
+Sometimes it is not necessary to reinstall build-essential.
+When the license agreement appears, press q so you dont have to scroll down.
+Accept the EULA.
+Use the default path by pressing enter.
+Would you like to add desktop menu shortcuts? Answer depends on your preference.
+Would you like to create a symbolic link? Enter yes.
+It will now install CUDA.
+
+'''
+echo -e "\nexport PATH=$PATH:/usr/local/cuda-7.0/bin\nexport LD_LIBRARY_PATH=:/usr/local/cuda-7.0/lib64" >> .bashrc  
+
+source ~/.bashrc
+
+'''
+After registering with NVIDA, download cuDNN. Extract the tar and copy the headers and libraries to the CUDA directory.
+'''
+tar -zxf cudnn-6.5-linux-x64-v2.tgz
+cd cudnn-6.5-linux-x64-v2
+sudo cp lib* /usr/local/cuda/lib64/
+sudo cp cudnn.h /usr/local/cuda/include/
+
+# install bleeding-edge theano:
+git clone git://github.com/Theano/Theano.git
+cd Theano
+python setup.py develop --user
+cd ~
+
+# get some sweet pylearn2: (http://deeplearning.net/software/pylearn2/#download-and-installation)
+git clone git://github.com/lisa-lab/pylearn2.git
+cd pylearn2
+sudo python setup.py develop
+
 
 echo -e "\n[global]\nfloatX=float32\ndevice=gpu\n[mode]=FAST_RUN\n\n[nvcc]\nfastmath=True\n\n[cuda]\nroot=/usr/local/cuda" >> ~/.theanorc  
 
