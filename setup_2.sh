@@ -1,6 +1,6 @@
 #!/bin/bash -e
 # Simple setup.sh for configuring Ubuntu EC2 instance
-# for headless setup. Only needs to be run once after instance creation
+# for headless setup. Only needs to be run once after instance creation. Still alpha!
 # PART 2 - after the reboot!
 
 # from https://github.com/BVLC/caffe/wiki/Install-Caffe-on-EC2-from-scratch-(Ubuntu,-CUDA-7,-cuDNN)
@@ -69,3 +69,4 @@ cat ~/test.zip.* > ~/test.zip
 # unzip da files
 unzip train.zip
 unzip test.zip
+

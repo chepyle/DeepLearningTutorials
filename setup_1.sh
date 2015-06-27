@@ -1,6 +1,6 @@
 #!/bin/bash -e
 # Simple setup.sh for configuring Ubuntu EC2 instance
-# for headless setup. Only needs to be run once after instance creation
+# for headless setup. Only needs to be run once after instance creation.  Still alpha!
 
 # Install basics
 sudo apt-get update && apt-get install build-essential

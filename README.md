@@ -1,6 +1,6 @@
 #Quick Start
 
---Launch an Amazon EC2 GPU instance (g2.2xlarge), spot insance price is usually <0.20 USD. Be sure to select the availability zone when creating the instance in order to get the best available rate.
+--Launch an Amazon EC2 GPU instance (g2.2xlarge), spot instance price is usually <0.20 USD. Be sure to select the availability zone when creating the instance in order to get the best available rate.  Some (very under-tested) scripts should encapsulate the setup process:
 
 --Once logged in, enter the command:
 `curl https://raw.githubusercontent.com/chepyle/DeepLearningTutorials/master/setup_1.sh | sh`
@@ -8,7 +8,7 @@
 -- the instance will reboot, then from the home directory run 
 `./DeepLearningTutorials/setup_2.sh`
 
-
+-- once installed, do a `screen` then use utilities like `top` and `watch nvidia-smi` to check on progress
 
 #Deep Learning Tutorials
 
