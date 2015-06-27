@@ -41,37 +41,9 @@ sudo apt-get install linux-image-extra-virtual
 Important: While installing the linux-image-extra-virtual, you may be prompted "What would you like to do about menu.lst?" I selected "keep the local version currently installed"
 '''
 
-sudo cp ~/DeepLearningTutorials/nouveau-kms.conf /etc/modprobe.d/nouveau-kms.conf
+sudo cp ~/DeepLearningTutorials/nouveau-kms.conf /etc/modprobe.d/blacklist-nouveau.conf
 
 echo options nouveau modeset=0 | sudo tee -a /etc/modprobe.d/nouveau-kms.conf
 sudo update-initramfs -u
-sudo reboot
-
-'''
-#An older version of  cuda installer:
-
-#http://tleyden.github.io/blog/2014/10/25/cuda-6-dot-5-on-aws-gpu-instance-running-ubuntu-14-dot-04/
-#wget http://us.download.nvidia.com/XFree86/Linux-x86_64/346.47/NVIDIA-Linux-x86_64-346.47.run
-# move nouveau blacklist config file for NVIDIA driver install
-sudo cp ~/DeepLearningTutorials/nouveau-kms.conf /etc/modprobe.d/nouveau-kms.conf
-
-
-wget http://developer.download.nvidia.com/compute/cuda/6_5/rel/installers/cuda_6.5.14_linux_64.run
-chmod +x cuda_6.5.14_linux_64.run
-mkdir nvidia_installers
-./cuda_6.5.14_linux_64.run -extract=`pwd`/nvidia_installers
-
-sudo ./nvidia_installer/NVIDIA-Linux-x86_64-340.29.run
-
-sudo apt-get install -y linux-image-extra-virtual # choose package maintainers version
-
-echo options nouveau modeset=0 | sudo tee -a /etc/modprobe.d/nouveau-kms.conf
-
-sudo update-initramfs -u
-'''
-
-
-
-# reboot
 sudo reboot
 

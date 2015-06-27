@@ -8,13 +8,13 @@
 sudo apt-get install linux-source
 sudo apt-get install linux-headers-`uname -r`
 
-cd nvidia_installers
-sudo ./NVIDIA-Linux-x86_64-346.46.run
+sudo ~/nvidia_installers/NVIDIA-Linux-x86_64-346.46.run
 
 '''
 Accept the license agreement.
 If you see: "nvidia-installer was forced to guess the X library path '/usr/lib' and X module path ..." go ahead anc click OK.
 If you see "The CC version check failed" then click "Ignore CC version check".
+I said no to DKMS kernel registration
 It may ask you about 32-bit libraries, I selected to yes, install them.
 It will ask you about running nvidia-xconfig to update your X configuration file. I selected no.
 Run nvidia-smi to view the installed GPUs.
@@ -22,8 +22,8 @@ Run nvidia-smi to view the installed GPUs.
 
 sudo modprobe nvidia
 sudo apt-get install build-essential
-sudo ./cuda-linux64-rel-7.0.28-19326674.run
-sudo ./cuda-samples-linux-7.0.28-19326674.run
+sudo ~/nvidia_installers/cuda-linux64-rel-7.0.28-19326674.run
+sudo ~/nvidia_installers/cuda-samples-linux-7.0.28-19326674.run
 
 '''
 Sometimes it is not necessary to reinstall build-essential.
@@ -58,7 +58,7 @@ git clone git://github.com/lisa-lab/pylearn2.git
 cd pylearn2
 sudo python setup.py develop
 
-
+# an important bit from http://markus.com/install-theano-on-aws/ :
 echo -e "\n[global]\nfloatX=float32\ndevice=gpu\n[mode]=FAST_RUN\n\n[nvcc]\nfastmath=True\n\n[cuda]\nroot=/usr/local/cuda" >> ~/.theanorc  
 
 # assuming the train.zip.00* and test.zip.00* files are in the home directory, combine them:
