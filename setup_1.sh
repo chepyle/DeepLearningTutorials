@@ -5,7 +5,7 @@
 # Install basics
 sudo apt-get update && apt-get install build-essential
 
-sudo apt-get install -y git python-pip python-dev ipython unzip zlibc zlib1g zlib1g-dev lynx libjpeg-dev python-numpy python-scipy python-nose g++ libopenblas-dev gcc gfortran wget linux-image-generic  
+sudo apt-get install -y git python-pip python-dev ipython unzip zlibc zlib1g zlib1g-dev lynx libjpeg-dev python-numpy python-scipy python-nose g++ libopenblas-dev gcc gfortran wget linux-image-generic parallel
 
 
 # Install emacs24
